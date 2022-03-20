@@ -2,13 +2,16 @@
 grid-area: nav;
 background-color: cornflowerblue;
 border-radius: 3px;
+padding: 10px;
 }
 
 .item a{
     color: white;
+    text-decoration: none;
 }
-.active a{
-    color: fuchsia;
+
+.item .active{
+    color: gold;
 }
 
 .nav a:hover {
