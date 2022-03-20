@@ -1,0 +1,16 @@
+.nav {
+grid-area: nav;
+background-color: cornflowerblue;
+border-radius: 3px;
+}
+
+.item a{
+    color: white;
+}
+.active a{
+    color: fuchsia;
+}
+
+.nav a:hover {
+font-size: calc(100% + 5%);
+}

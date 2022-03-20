@@ -1,0 +1,11 @@
+.item {
+    color: aquamarine;
+   
+  }
+
+
+.item img{
+  max-width: 30px;
+  box-shadow: none;
+  border-radius: 50%;
+}

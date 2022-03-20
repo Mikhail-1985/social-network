@@ -1,0 +1,11 @@
+.content {
+    grid-area: content;
+    border-radius: 3px;
+  }
+
+.content img {
+  box-shadow: 5px 5px 5px #ccc;
+}
+
+
+  

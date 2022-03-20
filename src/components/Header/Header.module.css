@@ -1,0 +1,11 @@
+
+.header {
+    grid-area: header;
+    background-color: cornflowerblue;
+    border-radius: 3px;
+}
+
+.header img {
+width: 30px;
+cursor: pointer;
+}
