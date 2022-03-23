@@ -1,13 +1,15 @@
 
 .dialogs__items {
     padding: 10px;
+    cursor: pointer;
 }
 
 .dialogs__item a{
     text-decoration: none;
     color: aqua;
+    
 }
 
 .dialogs__item .active {
-    color: gold;
+    color: rgb(233, 200, 17);
 }

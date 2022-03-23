@@ -5,24 +5,22 @@ import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
 import Profile from './components/Profile/Profile';
 import Dialogs from './components/Dialogs/Dialogs';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
-
-function App() {
+function App(props) {
+  // debugger;
   return (
-    <BrowserRouter>
     <div className="app-wrapper">
       <Header />
       <Navbar />
       <div className='app-wrapper__content'>
         <Routes>
-          <Route path='/profile/*' element={<Profile />} />
-          <Route path='/dialogs/*' element={<Dialogs />} />
+          <Route path='/profile/*' element={<Profile dispatch={props.dispatch} profilePage={props.state.profilePage} />} />
+          <Route path='/dialogs/*' element={<Dialogs store={props.store} />} />
         </Routes>
       </div>
 
     </div>
-    </BrowserRouter>
   );
 }
 
