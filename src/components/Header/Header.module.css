@@ -9,3 +9,13 @@
 width: 30px;
 cursor: pointer;
 }
+
+
+.loginBlock {
+    float: right;
+    color: wheat;
+}
+
+.loginBlock a {
+    color: wheat
+}

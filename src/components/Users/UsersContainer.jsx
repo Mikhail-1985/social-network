@@ -2,44 +2,31 @@ import React from "react";
 import { connect } from "react-redux";
 import {
   follow,
-  setTotalUsersCount,
-  setUsers,
-  toggleIsLoading,
+  unfollow,
+  // setTotalUsersCount,
+  // setUsers,
+  // toggleIsLoading,
+  togglefollowingProgress,
+  getUsersThunkCreator,
 } from "../../redux/users-reducer";
 import Users from "./Users";
 import { setCurrentPage } from "./../../redux/users-reducer";
-import axios from "axios";
+// import axios from "axios";
 import Preloader from "../common/Preloader/Preloader";
+import { withAuthRedirect } from "../../hoc/withAuthRedirect";
+import { compose } from "redux";
+// import { usersAPI } from "../../api/api";
 
 class UsersContainer extends React.Component {
   componentDidMount() {
-    this.props.toggleIsLoading(true);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`
-      )
-      .then((response) => {
-        this.props.toggleIsLoading(false);
-        console.log(response);
-        // debugger;
-        this.props.setUsers(response.data.items);
-        this.props.setTotalUsersCount(response.data.totalCount);
-      });
+    this.props.getUsersThunkCreator(
+      this.props.currentPage,
+      this.props.pageSize
+    );
   }
 
   onPageChanged = (pageNumber) => {
-    this.props.setCurrentPage(pageNumber);
-    this.props.toggleIsLoading(true);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count${this.props.pageSize}`
-      )
-      .then((response) => {
-        this.props.toggleIsLoading(false);
-        console.log(response);
-        // debugger;
-        this.props.setUsers(response.data.items);
-      });
+    this.props.getUsersThunkCreator(pageNumber, this.props.pageSize);
   };
 
   render() {
@@ -54,13 +41,18 @@ class UsersContainer extends React.Component {
           currentPage={this.props.currentPage}
           // pages={this.props.pages}
           users={this.props.users}
-          toggleFollowed={this.props.toggleFollowed}
+          follow={this.props.follow}
+          unfollow={this.props.unfollow}
           // isLoading={this.props.isLoading}
+          followingInProgress={this.props.followingInProgress}
+          // togglefollowingProgress= {this.props.togglefollowingProgress}
         />
       </>
     );
   }
 }
+
+let AuthRedirectComponent = withAuthRedirect(UsersContainer);
 
 let mapStateToProps = (state) => {
   return {
@@ -69,34 +61,29 @@ let mapStateToProps = (state) => {
     totalUsersCount: state.usersPage.totalUsersCount,
     currentPage: state.usersPage.currentPage,
     isLoading: state.usersPage.isLoading,
+    followingInProgress: state.usersPage.followingInProgress,
+    // togglefollowingProgress: state.usersPage.togglefollowingProgress
   };
 };
 
-// let mapDispatchToProps = (dispatch) => {
-//   return {
-//     toggleFollowed: (userId) => {
-//       dispatch(followAC(userId));
-//     },
-//     setUsers: (users) => {
-//       dispatch(setUsersAC(users));
-//     },
-//     setCurrentPage: (pageNumber) => {
-//       dispatch(setCurrentPageAC(pageNumber));
-//     },
-//     setTotalUsersCount: (totalCount) => {
-//       dispatch(setTotalUsersCountAC(totalCount));
-//     },
-//     toggleIsLoading: (isLoading) => {
-//       dispatch(toggleIsLoadingAC(isLoading));
-//     }
+// export default connect(mapStateToProps, {
+//   follow,
+//   unfollow,
+//   // setUsers,
+//   setCurrentPage,
+//   // setTotalUsersCount,
+//   // toggleIsLoading,
+//   togglefollowingProgress,
+//   getUsersThunkCreator
+// })(AuthRedirectComponent);
 
-//   };
-// };
-
-export default connect(mapStateToProps, {
-  follow,
-  setUsers,
-  setCurrentPage,
-  setTotalUsersCount,
-  toggleIsLoading,
-})(UsersContainer);
+export default compose(
+  connect(mapStateToProps, {
+    follow,
+    unfollow,
+    setCurrentPage,
+    togglefollowingProgress,
+    getUsersThunkCreator,
+  }),
+  withAuthRedirect
+)(UsersContainer);

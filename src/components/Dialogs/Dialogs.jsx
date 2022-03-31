@@ -1,9 +1,8 @@
 import React from "react";
-// import { NavLink } from "react-router-dom";
 import styles from "./Dialogs.module.css";
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-// import { sendMessageCreator, updateNewMessageBodyCreator } from "../../redux/dilogs-reducer";
+import { Navigate } from "react-router-dom";
 
 const Dialogs = (props) => {
   let state = props.dialogsPage;
@@ -24,6 +23,10 @@ const Dialogs = (props) => {
   let onSendMessageClick = () => {
     props.sendMessage();
   };
+
+  if (props.isAuth === false) {
+    return <Navigate to={"/login"} />;
+  }
 
   return (
     <div className={styles.dialogs}>
