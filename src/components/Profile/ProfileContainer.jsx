@@ -1,17 +1,12 @@
 import React from "react";
 import Profile from "./Profile";
-// import * as axios from 'axios';
 import { connect } from "react-redux";
-// import { setUserProfile } from "../../redux/profile-reducer";
-import { Navigate, useMatch } from "react-router-dom";
-// import { usersAPI } from './../../api/api';
+import { useMatch } from "react-router-dom";
 import {
   getUserProfile,
   getStatus,
   updateStatus,
 } from "./../../redux/profile-reducer";
-import { withAuthRedirect } from "../../hoc/withAuthRedirect";
-// import { compose } from 'redux';
 
 class ProfileContainer extends React.Component {
   // debugger;
@@ -33,14 +28,6 @@ class ProfileContainer extends React.Component {
     );
   }
 }
-
-// compose(
-//   connect(mapStateToProps, { getUserProfile }),
-//   ProfileURLMatch,
-//   withAuthRedirect
-// )(ProfileContainer);
-
-// let AuthRedirectComponent = withAuthRedirect(ProfileContainer);
 
 let mapStateToProps = (state) => ({
   profile: state.profilePage.profile,

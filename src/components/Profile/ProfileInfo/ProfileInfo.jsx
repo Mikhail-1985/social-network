@@ -12,10 +12,6 @@ const ProfileInfo = (props) => {
   return (
     <div>
       <div>
-        {/* <img className={styles.hat}
-          src="https://avatars.mds.yandex.net/i?id=6bbde02e69dd39822b62d5691771a3df-4825382-images-thumbs&n=13"
-          alt="hi"
-        /> */}
       </div>
       <div className={styles.descritpionBlock}>
         <img src={props.profile.photos.large} alt='hi'/>
