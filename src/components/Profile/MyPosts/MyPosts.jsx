@@ -1,4 +1,4 @@
-import React from "react";
+import React, {PureComponent} from "react";
 import { Field, reduxForm } from "redux-form";
 import {maxLengthCreator, required } from "../../../utils/validators/validators";
 import { Textarea } from "../../common/FormsControl/FormsControl";
@@ -29,31 +29,33 @@ const PostReduxForm = reduxForm({
 })(PostForm);
 
 
-const MyPosts = (props) => {
-  // debugger;
-  let postsElements = props.posts.map((data) => (
-    <Post message={data.message} key={data.id} like={data.like} id={data.id} />
-  ));
+class MyPosts extends PureComponent {
 
-  // let newPostElement = createRef();
-
-  const onAddPost = (data) => {
-    props.addPost(data.newPostText);
-  };
-  
-
-  // let onPostChange = () => {
-  //   let text = newPostElement.current.value;
-  //   props.updateNewPostText(text);
+  // shouldComponentUpdate(nextProps, nextState){
+  //   return nextProps !== this.props || nextState !== this.state
   // }
 
-  return (
-    <div className={styles.postsBlock}>
-      <h3>My Post</h3>
-      <PostReduxForm onSubmit={onAddPost}/>
-      <div className={styles.posts}>{postsElements}</div>
-    </div>
-  );
-};
+  render() {
+    const {
+      props,
+    } = this;
+
+    // debugger;
+    let postsElements = props.posts.map((data) => (
+      <Post message={data.message} key={data.id} like={data.like} id={data.id} />
+    ));
+    const onAddPost = (data) => {
+      props.addPost(data.newPostText);
+    };
+
+    return (
+      <div className={styles.postsBlock}>
+        <h3>My Post</h3>
+        <PostReduxForm onSubmit={onAddPost}/>
+        <div className={styles.posts}>{postsElements}</div>
+      </div>
+    );
+  }
+}
 
 export default MyPosts;
