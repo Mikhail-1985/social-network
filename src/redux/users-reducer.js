@@ -84,11 +84,12 @@ export const setTotalUsersCount = (totalCount) => ({ type: SET_TOTAL_USERSCOUNT,
 export const toggleIsLoading = (isLoading) => ({ type: TOGGLE_IS_LOADING, isLoading })
 export const togglefollowingProgress = (isLoading, userId) => ({ type: TOGGLE_IS_FOLLOWING_PROGRESS, isLoading, userId })
 
-export const getUsersThunkCreator = (currentPage, pageSize) => {
+export const getUsersThunkCreator = (page, pageSize) => {
     return (dispatch) => {
         dispatch(toggleIsLoading(true));
+        dispatch(setCurrentPage(page));
 
-        usersAPI.getUsers(currentPage, pageSize).then((data) => {
+        usersAPI.getUsers(page, pageSize).then((data) => {
             dispatch(toggleIsLoading(false));
             dispatch(setUsers(data.items));
             dispatch(setTotalUsersCount(data.totalCount));
