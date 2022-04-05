@@ -51,19 +51,6 @@ class UsersContainer extends React.Component {
   }
 }
 
-// let AuthRedirectComponent = withAuthRedirect(UsersContainer);
-
-// let mapStateToProps = (state) => {
-//   return {
-//     users: state.usersPage.users,
-//     pageSize: state.usersPage.pageSize,
-//     totalUsersCount: state.usersPage.totalUsersCount,
-//     currentPage: state.usersPage.currentPage,
-//     isLoading: state.usersPage.isLoading,
-//     followingInProgress: state.usersPage.followingInProgress
-//   };
-// };
-
 let mapStateToProps = (state) => {
   return {
     users: getUsers(state),
@@ -74,17 +61,6 @@ let mapStateToProps = (state) => {
     followingInProgress: getFollowingInProgress(state),
   };
 };
-
-// export default connect(mapStateToProps, {
-//   follow,
-//   unfollow,
-//   // setUsers,
-//   setCurrentPage,
-//   // setTotalUsersCount,
-//   // toggleIsLoading,
-//   togglefollowingProgress,
-//   getUsersThunkCreator
-// })(AuthRedirectComponent);
 
 export default compose(
   connect(mapStateToProps, {
